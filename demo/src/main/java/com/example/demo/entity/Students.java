@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
                 columnNames = "email_id"
         )
 )
-public class students {
+public class Students {
     @Id
     @SequenceGenerator(
             name = "student_sequence",
@@ -26,12 +26,18 @@ public class students {
     )
     @GeneratedValue(strategy= GenerationType.SEQUENCE,
     generator = "student_sequence")
+    @Column(
+            name = "student_Id"
+    )
     private Long studentId;
     @Column(
-            name = "name"
+            name = "first_name"
     )
     private String firstName;
-    private String LastName;
+    @Column(
+            name = "last_name"
+    )
+    private String lastName;
     @Column(
             name = "email_id",
             nullable = false

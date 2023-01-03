@@ -1,9 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,19 +13,30 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @AttributeOverrides({
         @AttributeOverride(
-                name="Name",
+                name="name",
                 column=@Column(name = "guardian_name")
         ),
-        @AttributeOverride(name = "Email",
+        @AttributeOverride(name = "email",
                 column = @Column(name = "guardian_email")
         ),
-        @AttributeOverride(name = "Mobile",
-                column = @Column(name = "guardian_mobile")
-        )
+        @AttributeOverride(name = "code",
+                column = @Column(name = "guardian_code",
+                nullable = false)
+        ),
+        @AttributeOverride(name = "mobile",
+        column = @Column(name = "guardian_mobile")
+)
 }
 )
+@Table(
+        uniqueConstraints = @UniqueConstraint(
+                name = "code_unique",
+                columnNames = "code"
+        )
+)
 public class Guardian {
-    private String Name;
-    private String Email;
-    private String Mobile;
+    private String name;
+    private String email;
+    private String mobile;
+    private String code;
 }
