@@ -87,4 +87,13 @@ class StudentRepositoryTest {
         System.out.println(s);
 
     }
+
+    @Test
+    public void changeGuardianName(){
+        studentRepository.changeGuardianName("meena","123");
+
+
+    }
+
+
 }

@@ -1,7 +1,9 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.Students;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -28,4 +30,17 @@ public interface StudentRepository extends JpaRepository<Students,Long> {
 
     @Query("select c from Students c where c.guardian.code = ?1")
     Students getGuardianCode(String code);
+
+    @Query(
+            value = "select * from tbl_students where guardian_code= ?1",
+            nativeQuery = true
+    )
+    Students getCodeByNativeQuery(String code);
+    @Transactional
+    @Modifying
+    @Query(
+            value = " update tbl_students set guardian_name = ?1 where guardian_code = ?2",
+            nativeQuery = true
+    )
+    void changeGuardianName( String name ,String code);
 }
