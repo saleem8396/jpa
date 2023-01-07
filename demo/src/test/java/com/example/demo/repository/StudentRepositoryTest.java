@@ -1,7 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.Guardian;
-import com.example.demo.entity.Students;
+import com.example.demo.entity.*;
 import com.example.demo.entity.Students;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,8 +90,28 @@ class StudentRepositoryTest {
     @Test
     public void changeGuardianName(){
         studentRepository.changeGuardianName("meena","123");
+    }
 
+    @Test
+    public void saveCourseByStudent(){
+        Students students=Students.builder()
 
+                .emailId("newjoinee@tcs.com")
+                .firstName("fresher")
+                .lastName("forever")
+                .build();
+        Teacher teacher=Teacher.builder()
+                .firstName("jason")
+                .lastName("samuel")
+                .build();
+        Course course=Course.builder()
+                .title("AI")
+                .teacher(teacher)
+                .credit(12)
+                .build();
+
+        students.addCourse(course);
+        studentRepository.save(students);
     }
 
 

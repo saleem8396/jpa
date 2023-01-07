@@ -1,10 +1,12 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 
 @Data
 @AllArgsConstructor
@@ -21,19 +23,16 @@ import lombok.NoArgsConstructor;
         ),
         @AttributeOverride(name = "code",
                 column = @Column(name = "guardian_code",
-                nullable = false)
+                        nullable = true
+               )
         ),
         @AttributeOverride(name = "mobile",
         column = @Column(name = "guardian_mobile")
 )
 }
 )
-@Table(
-        uniqueConstraints = @UniqueConstraint(
-                name = "code_unique",
-                columnNames = "code"
-        )
-)
+
+
 public class Guardian {
     private String name;
     private String email;
